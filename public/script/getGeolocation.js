@@ -19,12 +19,19 @@ if (navigator.geolocation) {
         
         console.log(weatherJSON);
 
-        document.getElementById("userLat").textContent = userLat;
-        document.getElementById("userLon").textContent = userLon;
+        document.getElementById("userLat").textContent = userLat.toFixed(2);
+        document.getElementById("userLon").textContent = userLon.toFixed(2);
 
         userCountry = countryJSON.address.country;
         userAltitude = weatherJSON.elevation;
-        countryJSON.address.city ? userVillage = countryJSON.address.city: userVillage = countryJSON.address.village;
+
+        if(countryJSON.address.city){
+            userVillage = countryJSON.address.city
+        }else if(countryJSON.address.village){
+            userVillage = countryJSON.address.village;
+        }else{
+            userVillage = countryJSON.address.town;
+        }
 
         userTemperature = weatherJSON.current_weather.temperature;
 

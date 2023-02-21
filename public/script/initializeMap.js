@@ -2,8 +2,10 @@ let map, marker, newMarker;
 let newMarkerLatLon;
 let firstTime = 1;
 
-map = L.map('map').setView([51.5, -0.09],10);
+map = L.map('map', { dragging: !L.Browser.mobile, tap: !L.Browser.mobile}).setView([51.5, -0.09],10);
+map.attributionControl.setPrefix('');
 marker = L.marker([51.5, -0.09]).addTo(map);
+
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,

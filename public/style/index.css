@@ -1,9 +1,12 @@
-
 *{
     margin: 0;
     padding: 0;
 
     box-sizing: border-box;
+}
+
+textarea:focus, input:focus{
+    outline: none;
 }
 
 body{
@@ -13,6 +16,7 @@ body{
     background: rgb(255, 201, 24);
 
     overflow: hidden;
+    overflow-y: scroll;
 }
 
 .top{
@@ -23,7 +27,20 @@ body{
     justify-content: space-between;
     align-items: center;
 
-    height: 50vh;
+    height: fit-content;
+}
+
+#header{
+    font-size: 6vh;
+    margin: 2.2vh 0;
+}
+
+#description{
+    text-align: center;
+    padding: 0 15vw;
+    margin: 2.2vh 0;
+
+    font-size: 3vh;
 }
 
 .search_container{
@@ -35,10 +52,24 @@ body{
     border-color: rgb(206, 134, 0);
     border-radius: 40px;
 
-    margin-bottom: 20px;
+    margin: 2.2vh 0;
 
     overflow: hidden;
 }
+
+#userLocation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: fit-content;
+    margin: 2.2vh 0;
+}
+
+#userLocation span:nth-child(2){
+    margin: 0 10px;
+}
+
 
 .search_container form{
     width: 100%;
@@ -72,10 +103,6 @@ body{
 .bottom{
     height: 50vh;
     width: 100vw;
-}
-
-#header{
-    padding: 2vh 0;
 }
 
 .weatherInfo_Map{
@@ -129,24 +156,23 @@ body{
     overflow: hidden;
 }
 
-#userLocation{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .buttons{
+
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+  
+    margin: 2.2vh 0;
 
     width: 60%;
-    margin: 20px 0;
 
     transition: all 0.2s ease-in-out;
 }
 
 .buttons button{
-    padding: 20px 40px;
+    font-size: 100%;
+
+    padding: 2vh 6vw;
 
     background-color: orange;
     border-radius: 20px;
@@ -156,8 +182,18 @@ body{
     cursor: pointer;
 }
 
+.buttons button:first-child{
+    margin-right: 5px;
+}
+.buttons button:last-child{
+    margin-left: 5px;
+}
+
 #mini{
+    overflow: hidden;
     position: absolute;
+
+    text-orientation: sideways;
 
     padding: 0;
     margin: 0;
@@ -174,6 +210,10 @@ body{
     cursor: pointer;
 
     transition: all .2s ease-in-out;
+
+    writing-mode: sideways-lr;
+    font-size: 100%;
+    letter-spacing: 2vh;
 }
 
 #mini:hover{
@@ -183,21 +223,34 @@ body{
     background-color: rgb(220, 220, 220);
 }
 
-@media only screen and (max-width: 600px) {
-    body{
-        overflow-y: scroll !important;
+@media only screen and (max-width: 550px) {
+    .top{
+        min-height: 70vh;
     }
-    button{
-        margin-bottom: 10px;
+    #header{
+        font-size: 5vh;
+    }
+    #description{
+        padding: 0;
+        font-size: 3vh;
+    }
+
+    .buttons button{
+        font-size: 2vh;
+    }
+    .buttons button:first-child{
+        margin-bottom: 5px;
+        margin-right: 0 !important;
+    }
+    .buttons button:last-child{
+        margin-top: 5px;
+        margin-left: 0 !important;
     }
 
     .buttons{
         flex-direction: column !important;
 
         width: fit-content !important;
-    }
-    .top{
-        height: 60vh;
     }
     .bottom{
         height: 100vh;
@@ -231,6 +284,14 @@ body{
         left: none ;
 
         width: 100% !important;
-        height: 5% !important; 
+        height: 12% !important; 
+
+        writing-mode: horizontal-tb;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .top{
+        padding: 0 5px;
     }
 }

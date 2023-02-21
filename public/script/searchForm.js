@@ -1,44 +1,32 @@
-const thisWeather = document.getElementById("thisWeather");
+let searchForm = document.getElementById("searchForm");
 
-let country = document.getElementById("country");
-let village = document.getElementById("village");
-let lat = document.getElementById("lat");
-let lon = document.getElementById("lon");
-let weatherDesc = document.getElementById("weatherDesc");
-let temp = document.getElementById("temp");
-let altitude = document.getElementById("altitude");
+searchForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    
+    let query = document.getElementById("search_box").value;
 
-let mapID = document.getElementById("map");
-let weatherInfo = document.getElementById("weatherInfo");
-
-
-thisWeather.addEventListener('click', async () => {
     weatherInfo.style.color = "transparent" 
     
     let locationCountry, locationVillage, locationLatLon, locationTemperature, locationWeatherDesc, locationAltitude;
 
-    const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${newMarkerLatLon.lat}&longitude=${newMarkerLatLon.lon}&current_weather=true`;
-    const weatherResponse = await fetch(weatherURL);
-    const weatherJSON = await weatherResponse.json();
-
-    const countryURL = `https://nominatim.openstreetmap.org/reverse?lat=${newMarkerLatLon.lat}&lon=${newMarkerLatLon.lon}&format=json`;
+    const countryURL = `https://nominatim.openstreetmap.org/search?q=${query}&format=json`;
     const countryResponse = await fetch(countryURL);
     const countryJSON = await countryResponse.json();
 
-    console.log(countryJSON.address);
+    locationCountry = countryJSON[0].display_name.toString().replace('"','').split(", ").pop();
+    locationVillage = countryJSON[0].display_name.toString().replace('"','').split(", ")[0];
+    locationLatLon = {lat: countryJSON[0].lat, lon: countryJSON[0].lon};
 
-    locationCountry = countryJSON.address.country;
+    map.panTo(new L.LatLng(locationLatLon.lat, locationLatLon.lon));
+    marker.setLatLng(new L.LatLng(locationLatLon.lat, locationLatLon.lon));
+
+    console.log("countryJSON[0]", countryJSON[0],locationLatLon.lat);
+
+    const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${locationLatLon.lat}&longitude=${locationLatLon.lon}&current_weather=true`;
+    const weatherResponse = await fetch(weatherURL);
+    const weatherJSON = await weatherResponse.json(); 
+
     locationAltitude = weatherJSON.elevation;
-
-    if(countryJSON.address.city){
-        locationVillage = countryJSON.address.city
-    }else if(countryJSON.address.village){
-        locationVillage = countryJSON.address.village;
-    }else{
-        locationVillage = countryJSON.address.town;
-    }
-
-    locationLatLon = newMarkerLatLon;
     locationTemperature = weatherJSON.current_weather.temperature;
 
     switch (weatherJSON.current_weather.weathercode){
@@ -140,8 +128,8 @@ thisWeather.addEventListener('click', async () => {
 
     country.innerText = locationCountry;
     village.innerText = locationVillage;
-    lat.innerText = locationLatLon.lat.toFixed(2);
-    lon.innerText = locationLatLon.lon.toFixed(2);
+    lat.innerText = parseFloat(locationLatLon.lat).toFixed(2);
+    lon.innerText = parseFloat(locationLatLon.lon).toFixed(2);
     weatherDesc.innerText = locationWeatherDesc;
     temp.innerText = locationTemperature;
     altitude.innerText = locationAltitude;
@@ -162,10 +150,5 @@ thisWeather.addEventListener('click', async () => {
         weatherInfo.style.display = "flex";
         weatherInfo.style.flex = "1 1 0";
         weatherInfo.style.color = "black";
-
-        setTimeout(() =>{
-            map.invalidateSize();
-            map.panTo(new L.LatLng(locationLatLon.lat, locationLatLon.lon));
-        },300);
     });
 });

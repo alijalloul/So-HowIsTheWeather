@@ -6,7 +6,7 @@ const app = express();
 
 mongoose.connect("mongodb://127.0.0.1/WeatherInfo");
 
-let port = "https://thisisawebsitewithareallylongname.buzz/myWeather/script/" || 5000
+let port = process.env.PORT || 5000;
 app.listen(port, () => console.log("connect to port 5000 success"));
 app.use(express.static("../public"));  
 app.use(express.json());
