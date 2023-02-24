@@ -1,10 +1,6 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const User = require("./userManualMarker.js");
 
 const app = express();
-
-mongoose.connect("mongodb://127.0.0.1/WeatherInfo");
 
 let port = process.env.PORT || 5000;
 app.listen(port, () => console.log("connect to port 5000 success"));
@@ -40,8 +36,4 @@ app.post("/manualMarker", (request, response) => {
         locationWeatherDesc: data.locationWeatherDesc,
         locationAltitude: data.locationAltitude
     });
-
-    const user = new User({locationCountry: data.locationCountry, locationVillage: data.locationVillage, locationLatLon: data.locationLatLon, locationTemperature: data.locationTemperature, locationWeatherDesc: data.locationWeatherDesc});
-    user.save().then(() => console.log("user saved"));
-    console.log(user);
 });
