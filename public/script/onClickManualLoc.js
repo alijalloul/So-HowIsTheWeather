@@ -163,9 +163,9 @@ thisWeather.addEventListener('click', async () => {
         weatherInfo.style.flex = "1 1 0";
         weatherInfo.style.color = "black";
 
-        setTimeout(() =>{
-            map.invalidateSize();
-            map.panTo(new L.LatLng(locationLatLon.lat, locationLatLon.lon));
-        },300);
+        setTimeout(() => { 
+          map.invalidateSize();
+          map.panTo(new L.LatLng(locationLatLon.lat, locationLatLon.lon));
+        }, 400);
     });
 });

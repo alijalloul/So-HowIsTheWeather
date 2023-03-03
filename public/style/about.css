@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+body {
+	font-family: Arial, sans-serif;
+  background: rgb(255, 201, 24);
+}
+
+header {
+	padding: 20px;
+	text-align: center;
+}
+
+main {
+	margin: 20px;
+}
+
+main section {
+	margin-bottom: 20px;
+}
+
+main h2 {
+	font-size: 24px;
+	color: #333;
+	margin-bottom: 10px;
+}
+
+main ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+main li {
+	margin-bottom: 5px;
+}

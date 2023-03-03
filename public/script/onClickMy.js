@@ -11,8 +11,9 @@ myWeather.addEventListener('click', () => {
     weatherInfo.style.flex = "1 1 0";
     weatherInfo.style.color = "black";
 
-    setTimeout(() =>{
-        map.invalidateSize();
-        map.panTo(new L.LatLng(userLatLon.userLat, userLatLon.userLon));
-    },300);
+    setTimeout(() => { 
+      map.invalidateSize();
+      map.panTo(new L.LatLng(userLatLon.userLat, userLatLon.userLon));
+    }, 400);
+    
 });

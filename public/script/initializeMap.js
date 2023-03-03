@@ -4,6 +4,13 @@ let firstTime = 1;
 
 map = L.map('map', { dragging: !L.Browser.mobile, tap: !L.Browser.mobile}).setView([51.5, -0.09],10);
 map.attributionControl.setPrefix('');
+
+const resizeObserver = new ResizeObserver(() => {
+  map.invalidateSize();
+});
+
+resizeObserver.observe(document.getElementById("map"));
+
 marker = L.marker([51.5, -0.09]).addTo(map);
 
 

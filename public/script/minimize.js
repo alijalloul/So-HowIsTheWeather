@@ -4,4 +4,8 @@ mini.addEventListener("click", () => {
     weatherInfo.style.padding = "0";
     weatherInfo.style.flex = "none";
     weatherInfo.style.color = "transparent";
+  
+    setTimeout(() => { 
+      map.invalidateSize()
+    }, 400);
 });

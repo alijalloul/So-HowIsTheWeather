@@ -1,0 +1,30 @@
+footer {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(50,50,50);
+  color: white;
+  padding: 25px;
+  text-align: center;
+
+  width: 100%;
+}
+
+footer .links{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  margin-top: 15px;
+  list-style: none;  
+}
+
+footer .links li a{
+  color: rgb(200,200,200);
+  text-decoration: none;
+}
+
+footer .links li a:hover{
+  color: rgb(240,240,240);
+  text-decoration: none;
+}
